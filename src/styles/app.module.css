@@ -1,8 +1,14 @@
-.codelines {
+body{
     background-image: url('https://github.com/images/modules/site/heroes/simple-codelines.svg') !important;
-    background-color: #2C3137!important;
+    background-color: #2C3137;
     min-height: 850px;
     /* background-repeat: repeat; */
     background-size: contain;
   }
-  
+  @media screen and (max-width: 800px) {
+
+    body {
+      background-color: #2C3137;
+    }
+    
+  }
