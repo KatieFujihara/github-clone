@@ -12,6 +12,11 @@ const Input = (props) => (
                 <p>can host and review code, manage projects, and</p> 
                 <p>build software alongside 31 million developers.</p>
             </div>
+            <div className={styles.info2}>
+                <p>GitHub is a development platform inspired by the way you work. From <a href='#'>open source</a> to <a href='#'>business</a>, you
+                can host and review code, manage projects, and 
+                build software alongside 31 million developers.</p>
+            </div>
         </div>
         <div className={styles.col2}>
             <div className={styles.searchForm}>

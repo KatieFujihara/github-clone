@@ -1,19 +1,18 @@
+@media screen and (max-width:1850px){
 .row {
-    display:inline;
+   display: flex;
+   margin: 10%;
 }
 .col1 {
-    margin: 10% 0 0 15%;
-    width:40%;
     float: left;
+    flex:50%;
+    width:60%;
+    margin-right: 1%;
 }
 .col2{
-    margin: 10% 15% 0 0;
-    width: 30%;
     float: left;
-}
-
-.info {
-    font-family: sans-serif;
+    flex:50%;
+    width: 40%;
 }
 
 .info h1{
@@ -22,27 +21,29 @@
     text-align: left;
     font-weight: normal;
 } 
-
 .info p {
+    display: none;
+}
+
+.info2 {
+    display: block;
+    font-family: sans-serif;
+}
+.info2 p {
     font-size: 25px;
     color: #ABADAF;
 }
-
-.info a {
+.info2 a {
     color: white;
     text-decoration: underline;
 }
-
 .searchForm {
-    margin: 10% auto;
-    width: 350px;
-    height: 300px;
+    width: 70%;
     background-color: #FAFBFC;
     border-radius: 2px;
     padding: 10px 30px;
     font-family: sans-serif;
     font-size: 15px;
-
 }
 .username {
     color: gray;
@@ -76,27 +77,30 @@
     text-align: center;
     margin-top: 20px;
     font-size: 10px;
-}
-@media screen and (max-width: 800px) {
-    .searchForm {
-        /* margin: 10% auto; */
     }
-    .col1 {
+}
+
+@media screen and (max-width: 700px) {
+    .row {
         display: block;
+     }
+     .col1 {
+        width: 80%;
         margin: 0 5%;
         text-align: center;
-        width: 90%;
-    }
+     }
     .col2 {
-        display: block;
-        margin: 0 5%;
-        width: 90%;
+        width: 80%;
+        margin: 0 20%;
+    }
+    .searchForm {
+        display: b
     }
     .info h1 {
         text-align: center;
-        font-size:50px;
+        font-size:30px;
     }
-    .info p {
-        font-size: 15px;
+    .info2 p{
+        font-size:18px;
     }
 }
