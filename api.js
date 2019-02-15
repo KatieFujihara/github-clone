@@ -1,9 +1,13 @@
 import axios from 'axios'
 
-export const call = userName => {
+export function call(userName) {
+    console.log(userName)
     return axios
-      .get(`https://api.github.com/users?q=${userName}page=3&per_page=10`)
-      .then(resp => 
-        resp.data
-      )     
+      .get(`https://api.github.com/search/users?q=${userName}`)
+      .then((response) => {
+        return response
+        })
+      .catch(function (error) {
+        console.log(error);
+      })
     }

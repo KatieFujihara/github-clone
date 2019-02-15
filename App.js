@@ -1,35 +1,31 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import styles from './src/styles/input.module.css'
 import * as api from './api'
 
   class Form extends React.Component {
     constructor(props) {
-      super(props);
-      this.handleSubmit = this.handleSubmit.bind(this);
-      this.handleChange = this.handleChange.bind(this);
-      this.state = {
-        userName: ''
-      }
-      
+      super(props)
+    this.state = { userName : ''};
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleSubmit = (event) => {
+      event.preventDefault();  
+      api.call(this.state.userName)
+      .then((response) => {
+      let user = this.props.onSubmit(response.data);
+      this.setState({
+        userName : user
+      })
+    })
   }
   handleChange(event) {
     let user = (event.target.value)
-    this.setState({userName: user})
+    this.setState({
+      userName: user
+    })
   }
-
-  handleSubmit(event) {
-    console.log(this.state.userName)
-    event.preventDefault();
-    api.call(this.state.userName).then(userName =>{
-      console.log(userName);
-      this.setState({
-        userName: userName
-        });
-      }).catch(err => {
-        console.log("ERROR: " + err);
-      })
-    }
-
     render() {
       return (   
         <div className={styles.row}>
@@ -50,7 +46,7 @@ import * as api from './api'
           <div className={styles.col2}>
            <form onSubmit={this.handleSubmit} className={styles.searchForm}>
               <label className={styles.username}>Username</label>
-              <input value={this.state.userName} onChange={this.handleChange} className={styles.userinput} placeholder="Pick a username"/>
+              <input value={this.state.userName || ''} onChange={this.handleChange} className={styles.userinput} placeholder="Pick a username"/>
               <input type="submit" className={styles.submit}/>
               <p className={styles.text}>By clicking “Search on GitHub”, you agree to our terms of service and privacy statement. We’ll occasionally send you account related emails.</p>
           </form>
@@ -60,10 +56,10 @@ import * as api from './api'
     }
   }
 
-  function CardItem(props) {
+  const Card = (props) => {
     return (
       <div>
-          <li><h1>{props.login}hello</h1></li>
+          <h1>{props.login}hello</h1>
           <div style={{ margin: '1em' }} >
               <img alt="avatar" style={{ width: '70px' }} src={props.avatar_url} />
           </div>
@@ -72,29 +68,25 @@ import * as api from './api'
     )
   }
   
-  function CardList(props) {
-    const cards = props.cards;
-    const cardItems = cards.map((card) =>
-      <CardItem/>
-    );
-    return (
-      <ul>
-        {cardItems}
-      </ul>
-    );
+ const CardList = (props) => {
+  const cards = props.cards;
+   return (
+      <div>
+        <ul>
+        {cards.map(card => <Card {...card} />)}
+        </ul>
+      </div>
+      );
   }
 
 
    class App extends React.Component {
-     constructor(props) {
-      super(props);
-    this.state = {
+    state = {
       cards: [],
-    }}
-  
+    };
     addNewCard = (cardInfo) => {
-      this.setState(listOfCards => ({
-        cards: listOfCards.cards.concat(cardInfo)
+      this.setState(prevState => ({
+        cards: prevState.cards.concat(cardInfo)
       }))
     }
       render (){
