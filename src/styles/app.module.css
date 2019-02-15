@@ -5,6 +5,34 @@ body{
     /* background-repeat: repeat; */
     background-size: contain;
   }
+  .show {
+    display: block;
+    margin: 10px 5px;
+    text-align: center;
+    float: left;
+    width: 200px;
+    height: 250px;
+    background-color: #5EA54A;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .username {
+    font-size: 20px;
+  }
+  .results {
+    display: inline-block;
+    margin: 0 5%;
+    text-align: center;
+  }
+
+  .avatar {
+    width: 100px;
+    margin: 0 auto;
+    border-radius: 5px;
+    border: 1px solid gray;
+    box-shadow: 5px;
+  }
   @media screen and (max-width: 800px) {
 
     body {

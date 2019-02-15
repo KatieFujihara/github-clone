@@ -1,6 +1,7 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import styles from './src/styles/input.module.css'
+import appStyles from './src/styles/app.module.css'
+
 import * as api from './api'
 
   class Form extends React.Component {
@@ -14,18 +15,20 @@ import * as api from './api'
       event.preventDefault();  
       api.call(this.state.userName)
       .then((response) => {
-      let user = this.props.onSubmit(response.data);
+      let user = this.props.onSubmit(response.data.items);
       this.setState({
         userName : user
       })
     })
   }
+
   handleChange(event) {
-    let user = (event.target.value)
     this.setState({
-      userName: user
+      userName: event.target.value
     })
   }
+
+
     render() {
       return (   
         <div className={styles.row}>
@@ -50,7 +53,7 @@ import * as api from './api'
               <input type="submit" className={styles.submit}/>
               <p className={styles.text}>By clicking “Search on GitHub”, you agree to our terms of service and privacy statement. We’ll occasionally send you account related emails.</p>
           </form>
-        </div>    
+        </div>  
       </div>
       )
     }
@@ -58,37 +61,49 @@ import * as api from './api'
 
   const Card = (props) => {
     return (
-      <div>
-          <h1>{props.login}hello</h1>
-          <div style={{ margin: '1em' }} >
-              <img alt="avatar" style={{ width: '70px' }} src={props.avatar_url} />
-          </div>
-          <div style={{ fontWeight: 'bold' }}><h1>{props.login}</h1></div>
+      <div className={appStyles.results} >
+        <div className={appStyles.show}>
+          <h1 className={appStyles.username}>{props.login}</h1>
+          <img alt="avatar" className={appStyles.avatar} src={props.avatar_url} />
+          <br></br>
+          <a className={appStyles.link} href={props.html_url}>Peep My Code!</a>
         </div>
+      </div>
     )
   }
   
  const CardList = (props) => {
-  const cards = props.cards;
    return (
       <div>
         <ul>
-        {cards.map(card => <Card {...card} />)}
+        {props.cards.map(card => <Card {...card} key= {card.id}  />)}
         </ul>
       </div>
       );
   }
 
-
    class App extends React.Component {
-    state = {
-      cards: [],
-    };
-    addNewCard = (cardInfo) => {
-      this.setState(prevState => ({
-        cards: prevState.cards.concat(cardInfo)
-      }))
+    constructor(props) {
+      super(props)
+      this.state = {
+        cards: []
+      };
     }
+
+    addNewCard = (cardInfo) => {
+      if (this.cards = []) {
+    this.setState({
+      cards: this.cards.concat(cardInfo)
+      })
+      this.cards = [];
+    }
+    else {
+    this.setState(prevState => ({
+      cards: prevState.cards.concat(cardInfo)
+      })
+    )
+  }
+}
       render (){
         return (
           <div>
@@ -98,5 +113,4 @@ import * as api from './api'
       );
   } 
 }
-
 export default App;

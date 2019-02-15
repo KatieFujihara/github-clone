@@ -6,7 +6,7 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "axios": "^0.18.0",
-    "bootstrap": "^4.0.0-beta.2",
+    "bootstrap": "^4.3.1",
     "gatsby": "^2.0.119",
     "gatsby-image": "^2.0.29",
     "gatsby-plugin-manifest": "^2.0.17",
@@ -39,5 +39,8 @@
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0"
   }
 }

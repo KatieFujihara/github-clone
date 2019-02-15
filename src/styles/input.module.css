@@ -68,9 +68,21 @@
     background-color:#6cc644;
     color: white;
 }
+.clear:hover{
+    background-color:#91372b; 
+}
+.clear {
+    margin-top: 20px;
+    height: 60px;
+    width: 100%;
+    border-radius: 5px;
+    background-color:#f45642;
+    color: white; 
+}
 .submit:hover{
     background-color:#5EA54A; 
 }
+
 .text {
     font-family: sans-serif;
     color: gray;
