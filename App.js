@@ -62,12 +62,14 @@ import * as api from './api'
   const Card = (props) => {
     return (
       <div className={appStyles.results} >
-        <div className={appStyles.show}>
+        <a href={props.html_url}>
+          <div className={appStyles.show}>
           <h1 className={appStyles.username}>{props.login}</h1>
           <img alt="avatar" className={appStyles.avatar} src={props.avatar_url} />
           <br></br>
           <a href={props.html_url}><img className={appStyles.link} src={github}/></a>
-        </div>
+         </div>
+        </a>
       </div>
     )
   }
