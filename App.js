@@ -1,23 +1,35 @@
 import React from 'react'
 import styles from './src/styles/input.module.css'
-import axios from 'axios'
+import * as api from './api'
 
   class Form extends React.Component {
-    state = {
-      userName: ''
+    constructor(props) {
+      super(props);
+      this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleChange = this.handleChange.bind(this);
+      this.state = {
+        userName: ''
+      }
+      
+  }
+  handleChange(event) {
+    let user = (event.target.value)
+    this.setState({userName: user})
+  }
+
+  handleSubmit(event) {
+    console.log(this.state.userName)
+    event.preventDefault();
+    api.call(this.state.userName).then(userName =>{
+      console.log(userName);
+      this.setState({
+        userName: userName
+        });
+      }).catch(err => {
+        console.log("ERROR: " + err);
+      })
     }
 
-    handleSubmit = event => {
-      event.preventDefault()
-    
-      axios
-        .get(`https://api.github.com/users?q=${this.state.value}page=3&per_page=10`)
-        .then(resp => {
-          let users = this.props.onSubmit(resp.data)
-          this.setState({ users: users })
-        })
-    }
-  
     render() {
       return (   
         <div className={styles.row}>
@@ -36,13 +48,11 @@ import axios from 'axios'
             </div>
           </div>
           <div className={styles.col2}>
-           <form onSubmit={this.handleSubmit}>
-            <div className={styles.searchForm}>
+           <form onSubmit={this.handleSubmit} className={styles.searchForm}>
               <label className={styles.username}>Username</label>
-              <input value={this.state.userName} onChange={event => this.setState({ userName: event.target.value})} className={styles.userinput} placeholder="Pick a username"/>
-              <input type="submit" value="Search on GitHub" className={styles.submit}/>
+              <input value={this.state.userName} onChange={this.handleChange} className={styles.userinput} placeholder="Pick a username"/>
+              <input type="submit" className={styles.submit}/>
               <p className={styles.text}>By clicking “Search on GitHub”, you agree to our terms of service and privacy statement. We’ll occasionally send you account related emails.</p>
-            </div>
           </form>
         </div>    
       </div>
@@ -53,7 +63,7 @@ import axios from 'axios'
   function CardItem(props) {
     return (
       <div>
-          <li><h1>{props.login}</h1></li>
+          <li><h1>{props.login}hello</h1></li>
           <div style={{ margin: '1em' }} >
               <img alt="avatar" style={{ width: '70px' }} src={props.avatar_url} />
           </div>
@@ -65,7 +75,7 @@ import axios from 'axios'
   function CardList(props) {
     const cards = props.cards;
     const cardItems = cards.map((card) =>
-      <CardItem key={card.id} />
+      <CardItem/>
     );
     return (
       <ul>
@@ -74,26 +84,27 @@ import axios from 'axios'
     );
   }
 
+
    class App extends React.Component {
-    state = {
+     constructor(props) {
+      super(props);
+    this.state = {
       cards: [],
-    }
+    }}
   
-    addNewCard = cardInfo => {
+    addNewCard = (cardInfo) => {
       this.setState(listOfCards => ({
         cards: listOfCards.cards.concat(cardInfo)
       }))
     }
-  
-    render() {
-      return (
+      render (){
+        return (
           <div>
               <Form onSubmit={this.addNewCard} />
               <CardList cards={this.state.cards}/>
-        </div>      
-      )
-    }
-  }
-
+          </div> 
+      );
+  } 
+}
 
 export default App;
