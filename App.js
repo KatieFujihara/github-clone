@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './src/styles/input.module.css'
 import appStyles from './src/styles/app.module.css'
-
+import github from './src/images/github.png'
 import * as api from './api'
 
   class Form extends React.Component {
@@ -66,7 +66,7 @@ import * as api from './api'
           <h1 className={appStyles.username}>{props.login}</h1>
           <img alt="avatar" className={appStyles.avatar} src={props.avatar_url} />
           <br></br>
-          <a className={appStyles.link} href={props.html_url}>Peep My Code!</a>
+          <a href={props.html_url}><img className={appStyles.link} src={github}/></a>
         </div>
       </div>
     )
