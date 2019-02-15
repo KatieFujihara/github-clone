@@ -1,4 +1,9 @@
 module.exports = {
+  siteMetadata: {
+    title: `GitHub Clone`,
+    description: `Search for people.`,
+    author: `@KatieOfCode`,
+  },
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
